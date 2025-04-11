@@ -1,0 +1,9 @@
+[project]
+name = "app"
+version = "0.1.0"
+description = ""
+authors = [{name = "Your Name", email = "your.email@example.com"}]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["app"]
