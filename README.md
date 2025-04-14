@@ -46,7 +46,7 @@ Build the Docker image for the appropriate environment:
 
 ### Development
 ```bash
-docker build --build-arg ENVIORNMENT=dev -t <your_tag> .
+docker build --build-arg ENVIORNMENT=dev -t my-app .
 ```
 
 ### Testing
