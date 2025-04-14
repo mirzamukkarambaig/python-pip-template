@@ -38,6 +38,14 @@ pip install -e ".[test]"
 pip install -e ".[prod]"
 ```
 
+> Adjust the entry point in the `pyproject.toml` file as needed for your application.
+
+### Running the application
+
+```bash
+app
+```
+
 ---
 
 ## 🐳 Docker Setup
