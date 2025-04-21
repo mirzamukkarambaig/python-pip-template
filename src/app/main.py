@@ -1,9 +1,5 @@
-from omegaconf import DictConfig, OmegaConf
-import hydra
-
-@hydra.main(version_base=None, config_path="conf", config_name="config.yaml")
-def main(cfg: DictConfig) -> None:
-    print(OmegaConf.to_yaml(cfg))
+def main():
+    print("Hello World")
 
 if __name__ == "__main__":
     main()
