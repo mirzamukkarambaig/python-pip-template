@@ -1,20 +1,39 @@
-FROM python:3.10-alpine
+# Use Python Alpine base image
+FROM python:3.11-alpine
 
-
-ARG ENVIORNMENT=dev
-ENV ENVIORNMENT=${ENVIORNMENT}
-
-COPY src /app/src
-COPY pyproject.toml /app/
-COPY tests /app/tests
-
+# Set working directory
 WORKDIR /app
 
-RUN apk add --no-cache gcc musl-dev libffi-dev
+# Install system dependencies that might be needed for Python packages
+RUN apk add --no-cache \
+    gcc \
+    musl-dev \
+    linux-headers \
+    libffi-dev
 
-RUN pip install --upgrade pip
+# Copy requirements file
+COPY requirements.txt .
 
+# Upgrade pip and install Python dependencies
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
-RUN pip install -e ".[${ENVIORNMENT}]"
+# Copy source code and configuration
+COPY src/ ./src/
+COPY tests/ ./tests/
 
-CMD [ "app" ]
+# Create a non-root user for security
+RUN addgroup -g 1001 -S appgroup && \
+    adduser -S appuser -u 1001 -G appgroup
+
+# Change ownership of the app directory
+RUN chown -R appuser:appgroup /app
+
+# Switch to non-root user
+USER appuser
+
+# Expose port (adjust as needed)
+EXPOSE 8000
+
+# Default command - run the main application
+CMD ["python", "-m", "src.app.main"]
