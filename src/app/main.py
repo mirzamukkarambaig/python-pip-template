@@ -388,11 +388,11 @@ def main():
         logger.info("=" * 80)
         logger.info(f"Script started at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         
-        # Process orders first
-        orders_success = process_orders()
-        
-        # Process inventory second
+        # Process inventory first
         inventory_success = process_inventory()
+
+        # Process orders second
+        orders_success = process_orders()
         
         # Final status
         if orders_success and inventory_success:
