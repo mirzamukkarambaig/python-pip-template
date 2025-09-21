@@ -173,7 +173,5 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-# Hydra-Core
-outputs/
-conf/
 content/
+/src/app/conf/credentials.json
