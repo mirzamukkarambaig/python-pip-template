@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Inventory and Orders Data Processing Script
 Fetches data from Zambeel API for both orders and inventory, then uploads to Google Sheets 
