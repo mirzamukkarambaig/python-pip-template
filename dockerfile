@@ -11,10 +11,13 @@ RUN apk add --no-cache \
     linux-headers \
     libffi-dev
 
-# Copy requirements and source code
+# Copy requirements and setup files
 COPY requirements.txt . 
-COPY src/ ./src/
 COPY setup.py . 
+
+# Copy the app directory contents to the root level
+COPY src/app/ ./
+COPY src/__init__.py ./src/
 
 # Upgrade pip and install Python dependencies in editable mode
 RUN pip install --no-cache-dir --upgrade pip && \
@@ -37,4 +40,4 @@ USER appuser
 EXPOSE 8000
 
 # Default command - run the main application
-CMD ["python", "-m", "src.app.main"]
+CMD ["python", "main.py"]
