@@ -17,7 +17,7 @@ from typing import Optional, Dict, Any, Tuple
 from datetime import datetime
 
 try:
-    from conf import config
+    from .conf import config
     
     # Validate configuration on startup
     config.validate_config()
