@@ -11,15 +11,16 @@ RUN apk add --no-cache \
     linux-headers \
     libffi-dev
 
-# Copy requirements file
-COPY requirements.txt .
-
-# Upgrade pip and install Python dependencies
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
-
-# Copy source code and configuration
+# Copy requirements and source code
+COPY requirements.txt . 
 COPY src/ ./src/
+COPY setup.py . 
+
+# Upgrade pip and install Python dependencies in editable mode
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -e .
+
+# Copy tests (optional, for testing in container)
 COPY tests/ ./tests/
 
 # Create a non-root user for security
